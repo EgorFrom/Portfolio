@@ -1,0 +1,7 @@
+@font-face {
+font-family: 'GUERRILLA';
+src: url('../fonts/GUERRILLA-Normal.otf');
+src: url('../fonts/GUERRILLA-Normal.otf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}

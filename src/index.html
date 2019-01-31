@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+  <meta name="description" content="Качественная разработка вашего сайта! В частности специализируюсь на landing page и корпоративных сайтах">
+	<meta name="keywords" content="-">
+	<title>Качественное создание сайтов для вас!</title>
+	<meta property="og:title" content="Разработка сайтов"/>
+
+	<meta property="og:description" content="Создам ваш сайт, быстро и отзывчиво. Помогу найти дизайнера, копирайтера и seo-оптимизатора"/>
+
+	<meta property="og:image" content="/img/Letter-E.png" />
+
+	<meta property="og:type" content="website"/>
+
+	<meta property="og:url" content= "http://nagibine.ru/" />
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="header-menu">
+						<a class="go_to_portfolio" href=".works"><div class="header-menu_item">Портфолио</div></a><!-- 						<a class="go_to_cooperation" href=".cooperation"><div class="header-menu_item">Ход работы</div></a> -->
+						<a class="go_to_skills" href=".skills"><div class="header-menu_item">Навыки</div></a>
+						<a class="go_to_link" href=".link"><div class="header-menu_item">Связаться</div></a>
+					</div>
+					
+				</div>
+				<div class="col-12 col-lg-6">
+					
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-10">
+					<div class="about-me">
+						<div class="about-me_img">
+							<img src="img/avatar.jpg" alt="Верстальщик">
+						</div>	
+						<div class="about-me_text">
+							<h1>Меня зовут Егор Нагибин и я сделаю ваш сайт</h1>	 	
+						</div>
+					</div>				
+					<div class="header_subtitle">
+						<ul>
+							<li style="animation-delay: 3s"><span>Адаптивно</span>, с помощью библиотеки Bootstrap или Zurb Foundation, ваш сайт будет корректно и приятно отображаться на всех устройствах</li>
+							<li style="animation-delay: 4s"><span>Чисто</span>, проверка сайта по стандартам W3C для "хорошего отношения" с поисковыми машинами</li>
+							<li style="animation-delay: 5s"><span>Быстро</span>, в обговоренные с вами сроки</li>
+							<li style="animation-delay: 6s"><span>Красиво</span>, используя последние технологии и возможности web-разработки!</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="works" id="works">
+			<transition name="modal">
+		<div class="overlayS" v-if="modalShowed">
+				<div class="overlayS-form">
+					<div class="overlayS-form__close" :class="classEye" v-on:click="modalShowed = !modalShowed" v-on:mouseover="changeEye_closing" v-on:mouseout="changeEye_opening"></div>
+					<form class="form">
+						<div class="header-box_title ">Связаться со мной</div>
+						<input type="text" name="user_name" class="header-box_input" placeholder="Ваше имя">
+						<input type="tel" name="user_phone" class="header-box_input" required placeholder="Телефон">
+						<input type="text" name="user_email" class="header-box_input" placeholder="E-mail">
+						<div class="note">Указывая свой E-mail, вы позволяете мне присылать вам информацию об акциях и нововведениях*</div>
+						<button class="btn">Отправить</button>
+					</form>
+				</div>
+		</div>
+			</transition>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="search">Посмотрите уже созданные проекты</label>
+						<input 
+							type="text" 
+							class="form-control" 
+							id="search" 
+							placeholder="СК Фазенда, BTG, Добрый картон, ..."
+							v-model="search"
+						>
+						<hr>
+						<ul>
+							<!-- <li
+								v-for="(item, index) in filteredProjects"
+								class=""
+								:class="{'active' : selectedProjectItems === index}"
+								v-on:click="selectProject(index)"
+							 >
+							{{ item.name }} - {{ item.type }}
+						</li> -->
+							<li
+								v-for="item in filteredProjects"
+								class=""
+								:class="{'active' : selectedProjectItems == item.num}"
+								v-on:click="selectProject(item.num)"
+							 >
+							{{ item.name }} - {{ item.type }}
+						</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /.col-4 -->
+				<div class="col-md-8">
+					<transition name="detailed_show">	
+						<div class="detailed">
+							<div class="row mt-4">
+								<div class="col-12 col-md-5">
+									
+									<h2> {{ Project.name }}</h2>
+									<div class="detailed-img">
+										<img 
+											:src="Project.img" 
+											:alt="Project.name" 
+											class="image detailed-project-img"
+										>
+									</div>
+									<div class="href-block">
+										<transition name="href">					
+											<p v-if="hrefVisibility"> 
+												<a :href="Project.href" target="_blank"> Ссылка </a>
+											</p>
+										</transition>
+									</div>
+									<button 
+									class="work_btn work_btn_o"
+									@click="hrefVisibility = !hrefVisibility"
+									v-if="!hrefVisibility"
+									>{{ hrefBtnText }}</button>
+									<button class="work_btn work_btn_want" v-on:click="modalShowed = !modalShowed">Хочу подобный!</button>	
+								</div>
+								<div class="col-12 col-md-7">
+									<h2>Детали</h2>
+									<ul>
+										<li><strong>Время</strong> -  {{ Project.time }} </li>
+										<li><strong>Стоимость</strong> -  {{Project.cost}} р.</li>
+										<li><strong>Описание работы:</strong> <br><p v-if="!flagReadMoreDescr">{{ subDescr }}</p><button class="detailed-read_more" v-if="!flagReadMoreDescr" v-on:click="flagReadMoreDescr = !flagReadMoreDescr">Читать далее</button> <p v-else>{{Project.descr}}</p> </li>
+									</ul>
+									
+								</div>
+							</div>
+						</div>
+					</transition>
+				</div>
+				<!-- /.col-8 -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container -->
+	</div>
+	<!-- /.works -->
+
+
+	
+
+	<!-- <section class="cooperation">
+		<div class="cooperation-title">Ход нашей с вами работы!</div>
+		<div class="row">
+		<div class="col-12 static-p">
+			<div class="w">0.</div> Если у вас нет домена/хостинга, мы оформляем с вами домен/хостинг на 1 год через <div class="w"><a href="https://link-host.net/" target="_blank" style="color: #130e27">link-host.net</a></div>
+		</div>
+		<div class="col-12 static-p">
+			<div class="w">1.</div>	Если у вас нет макета сайта в .psd формате (photoshop) или подобных форматах
+			<span>a) Совместно с вами мы выбираем макет сайта (платный/бесплатный) на ваше усмотрение</span>
+			<span>б) Нанимаем дизайнера, для создания макета за отдельную плату</span> 
+		</div>
+		<div class="col-12 static-p static-p-2"><div class="w">2.</div> Произведя оценку макета, я объявляю вам стоимость верстки этого сайта, и дальше у вас 2 пути развития<button class="btn btn-d choose_left" style="position: absolute; z-index: 3">Вы согласны</button><button class="btn btn-d choose_right" style="position: absolute; right: 5%; z-index: 3">Вы сомневаетесь</button>
+		</div>
+			<div class="col-12 col-lg-6">
+				<div class="p3-1">
+					<span class="w">3.</span> Мы обсуждаем сроки работы, я регистрирую вас в Trello (по желанию), чтобы вы могли наблюдать за работой и вносить правки/принимать работу поэтапно	
+					<button class="btn btn-d choose_left">Следующий шаг</button>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="p3-2">
+					<span class="w">3.</span> Теперь у вас есть свой макет сайта и вы можете попробовать найти другого исполнителя, по меньшей цене, быть может обжечься, облажаться и т.п. и потом вернуться ко мне :D, и ждать опять своей очереди, пока я занимаюсь другим проектом
+					<button class="btn btn-d choose_right">Следующий шаг</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="p4-1">
+					<span class="w">4.</span> Я занимаюсь версткой сайта, по окончанию верстки каждой секции, заливаю её на свой домен, и даю вам ссылку для проверки каждой секции по отдельности либо сразу нескольких секций.
+					<button class="btn btn-d choose_left">Следующий шаг</button>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="p4-2">
+					<span class="w">4.</span> Если вы вернулись не найдя исполнителя который сделает ваш сайт дешевле / потеряли деньги отдав смутному человеку в 2 раза меньше и он исчез, то теперь мы с вами обговариваем сроки и вы производите <span>оплату</span> и после этого я начинаю работу в обговоренные с вами сроки
+					<button class="btn btn-d choose_right">Следующий шаг</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="p5-1">
+					<span>5.</span> Перед завершением верстки последних секций, вы производите <span>оплату</span>, я заканчиваю верстку, переношу её на ваш домен и вы наслаждаетесь собственным сайтом!
+				</div>  
+			</div>
+			<div class="col-12 col-lg-6"> 
+				<div class="p5-2">
+					<span class="w">5.</span> Я регистрирую вас в Trello (по желанию), чтобы вы могли наблюдать за работой и вносить правки/принимать работу поэтапно. Верстка может производиться на вашем домене.
+				</div>
+			</div>
+		</div>
+		<a class="go_to_link" href=".link">
+			<div class="wantworkwithyou">Круто! Хочу работать с тобой!</div>
+		</a>
+
+	</section> -->
+	<!-- /.cooperation -->
+
+	
+	<section class="skills">
+		<div class="container">
+			<div class="skills-title" style="font-weight: 700; font-size: 20px">Обо мне и моих навыках</div>
+			<div class="skills-subtitle hidden-less-991px">Егор Сергеевич, <h3>верстальщик</h3>, рост 186, вес 73, корочки об окончании курса <h3>веб-разработчик</h3> 12.0 от академии верстки, корочка прохождения теста на Geekbrains, сложный уровень HTML/CSS, но считаю более важными следующие навыки:</div>
+			<div class="row">
+				<div class="col-12 col-lg-6 skills_ul">
+					<ul>
+						<li><span>HTML</span> — язык разметки.</li>
+						<li><span>CSS</span> — таблицы стилей(визуальное представление документа).</li>
+						<li><span>JS</span> — Язык Программирования, на котором я пишу какие дествия должны быть совершены при том или ином событии от пользователя.</li>
+						<li><span>jQuery</span> - это JavaScript-библиотека, фокусирующаяся на 
+						взаимодействии JavaScript, HTML и CSS. </li>
+						<li><span>Vue.js</span> - это гибкий JavaScript-фреймворк, для создания пользовательского интерфейса web-риложений</li>
+
+					</ul>
+				</div>
+				<div class="col-12 col-lg-6 skills_ul">
+					<ul>
+						<li><span>Sass, Scss</span> — препроцессорные языки, преобразующие компактное написание на языке sass/scss в css. </li>
+						<li><span>Gulp</span> — личный раб/таск-менеджер/сборщик проектов, автоматически выполняет часто используемые задачи. Пишется на языке JS. </li>
+						<li><span>Trello</span> — одна из самых популярных систем управления проектами в режиме онлайн, очень удобно, часто используется для того, чтобы заказчик видел процесс моей работы и мог по частям проверять и мониторить процесс. </li>
+						<li><span>Avocode</span> — аналог фотошопа, но более удобен и прост для верстальщиков.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section class="link">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12 col-lg-6">
+					<div class="link-text hidden-less-991px">
+						Если вы не знакомы с веб-разработкой, вы также можете написать мне, я буду рад помочь найти вам
+						<ul>
+							<li><h4 class="w w-a">Веб-дизайнера</h4>, который создаст вам логическую архитектуру сайта и художественно оформит её</li>
+							<li><h4 class="w w-a">Копирайтера</h4>, который напишет продающие или завлекающие тексты</li>
+							<li><h4 class="w w-a">Seo-оптимизатора</h4>, который выведет ваш сайт в топ поисковых систем!</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-12 col-lg-6">
+					<form class="form">
+						<div class="header-box_title ">Связаться со мной</div>
+						<input type="text" name="user_name" class="header-box_input" placeholder="Ваше имя">
+						<input type="tel" name="user_phone" class="header-box_input" required placeholder="Телефон">
+						<input type="text" name="user_email" class="header-box_input" placeholder="E-mail">
+						<div class="note">Указывая свой E-mail, вы позволяете мне присылать вам информацию об акциях и нововведениях*</div>
+						<button class="btn">Отправить</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<div class="overlay-success" id="modal-success">
+			<div class="popup">
+				<div class="popup-title">Спасибо вам!</div>
+				<!-- /.popup-title -->
+				<div class="popup-img"><img src="img/tick-inside-circle.svg" alt=""></div>
+				<!-- /.popup-img -->
+				<div class="popup-succcess">Ваша заявка принята, в скором времени я свяжусь с вами!</div>
+				<!-- /.popup-succcess -->
+			</div>
+			<!-- /.popup -->
+		</div>
+		<!-- /.overlay-success -->	
+
+	<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter48272042 = new Ya.Metrika({ id:48272042, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/48272042" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+	<footer class="footer">
+		Copyright © Егор Нагибин 2018
+		<a href="https://vk.com/id181437164" target="_blank" ><img src="img/vk.png" alt=""></a>
+		<a href="https://www.instagram.com/website_maker_72/" target="_blank" ><img src="img/instagram.png" alt=""></a>
+	</footer>
+	
+	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/fonts.css">
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script src="js/script.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script src="js/my_vue.js"></script>
+
+</body>
+</html>

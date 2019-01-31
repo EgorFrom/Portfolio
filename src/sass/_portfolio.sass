@@ -1,0 +1,100 @@
+.portfolio
+	width: 50%
+	margin-left: auto
+	margin-right: auto
+	margin-top: -20vh
+	border: 10px solid rgba(#2A1141, 0.9)
+	border-radius: 5px
+	margin-bottom: 50px
+	img
+		width: 100%
+		filter: grayscale(10%) contrast(130%) brightness(0.2)
+		-moz-transition: all 1s ease-out
+		-o-transition: all 1s ease-out
+		-webkit-transition: all 1s ease-out
+		&:hover
+			filter: grayscale(0)
+			cursor: pointer
+			-webkit-transform: scale(1.2)
+			-moz-transform: scale(1.2)
+			-o-transform: scale(1.2)
+	&:after
+		content: 'Мои работы'
+		position: absolute
+		z-index: 3
+		top: -15%
+		left: 35%	
+		font-size: 30px
+		color: #fff
+		font-weight: 700
+	&-slider-arrow
+		position: absolute
+		z-index: 2
+		top: 50%
+		height: 50px
+		width: 50px
+		background: transparent url(../img/interface/triangle-right.svg) center no-repeat
+		background-size: cover
+		&:hover
+			cursor: pointer
+		&_left
+			left: -65px
+			transform: rotateY(180deg)
+		&_right
+			right: -65px
+	&-popup
+		position: fixed
+		background-color: #fff
+		border: 3px solid #2A1141
+		width: 100%
+		height: 560px
+		top: 10vh
+		z-index: 7
+		&_video
+			padding-top: 100px
+			padding-left: 10px
+			padding-right: 10px
+		&_descr
+			padding: 10px
+			&-title
+			 font-size: 25px
+			 text-align: center	
+			&-text
+				font-size: 15px
+				font-weight: 700
+				margin-top: 20px
+				margin-bottom: 20px
+		&-btn
+			position: absolute	
+			bottom: 5%
+			right: 2%
+.overlay-portfolio
+	display: none
+	content: ''
+	position: absolute
+	z-index: 5
+	top: 0%
+	left: 0%
+	width: 100%
+	height: 100%	
+	background-color: rgba(black, 0.6)
+	&-close
+		position: absolute
+		z-index: 6
+		width: 100%
+		height: 100%
+		&_item
+			width: 25px
+			height: 25px
+			position: fixed
+			top: 4%
+			right: 2%
+			span
+				display: block
+				width: 100%
+				height: 3px
+				background-color: #fff
+			&_1
+				transform: rotate(45deg)	
+			&_2
+				transform: rotate(-45deg)	
